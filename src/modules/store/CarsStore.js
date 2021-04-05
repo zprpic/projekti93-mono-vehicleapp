@@ -75,11 +75,22 @@ class CarsStore {
     this.currentPage = pageNumber;
   }
 
-  // Get the correct page numbering using total length / carsPerPage and ceil up
   get pageNumbers() {
     return new Array(Math.ceil(this.data.length / this.carsPerPage))
       .fill(0)
       .map((_, idx) => idx + 1);
+  }
+
+  //BUGGY WITH PAGINATE AND SEARCH!
+  deleteVehicle(id) {
+    let updatedList;
+    updatedList = this.data.filter((item) => {
+      if (item.id !== +id) {
+        return item;
+      }
+      return updatedList;
+    });
+    this.data = updatedList;
   }
 }
 

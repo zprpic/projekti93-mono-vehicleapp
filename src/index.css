@@ -109,6 +109,12 @@ footer {
   height: 100px;
 }
 
+.item-delete {
+  position: absolute;
+  top: -16%;
+  right: -0%;
+}
+
 .item-edit button {
   position: absolute;
   bottom: 0;

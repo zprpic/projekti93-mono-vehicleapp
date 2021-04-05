@@ -2,7 +2,6 @@ import React from "react";
 import { observer } from "mobx-react";
 
 const Pagination = observer(({ pages, paginate }) => {
-  console.log(pages());
   return (
     <nav>
       <ul className="pagination">

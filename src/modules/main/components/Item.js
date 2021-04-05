@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Item({ name, model }) {
+function Item({ name, model, onClick, id }) {
   const [isBeingEdited, setIsBeingEdited] = useState(false);
   const [carName, setCarName] = useState("");
   const [carModel, setCarModel] = useState("");
@@ -23,9 +23,15 @@ function Item({ name, model }) {
           <button onClick={() => setIsBeingEdited(false)}>Save</button>
         </div>
       ) : (
-        <div className="item">
+        <div className="item" id={id}>
           <p className="name">{name}</p>
           <p className="model">{model}</p>
+          <button
+            className="item-delete"
+            onClick={(e) => onClick(e.target.parentElement.id)}
+          >
+            x
+          </button>
           <button onClick={() => setIsBeingEdited(true)}>Edit</button>
         </div>
       )}

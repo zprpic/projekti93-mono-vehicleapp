@@ -5,14 +5,21 @@ import Footer from "../footer/Footer";
 import { observer } from "mobx-react";
 
 const FilterableVehicleTable = observer(({ store }) => {
-  // This is for getting the correct pagination after filtering
   const dataList = store.paginatedData.map((item) => {
-    return <Item name={item.name} model={item.model} key={item.id} />;
+    return (
+      <Item
+        name={item.name}
+        model={item.model}
+        key={item.id}
+        onClick={store.deleteVehicle.bind(store)}
+        id={item.id}
+      />
+    );
   });
 
   let sortButtonText = store.sortedAZ === false ? "A-Z" : "Z-A";
 
-  const pages = () => store.pageNumbers; // Make sure not to get un-bind
+  const pages = () => store.pageNumbers;
   const paginate = (num) => store.paginate(num);
 
   return (
