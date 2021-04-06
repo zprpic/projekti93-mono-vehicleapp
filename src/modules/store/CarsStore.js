@@ -39,8 +39,8 @@ class CarsStore {
 
   // Paginated data after data is filtered
   get paginatedData() {
-    const indexOfLastCar = this.currentPage * this.carsPerPage;
-    const indexOfFirstCar = indexOfLastCar - this.carsPerPage;
+    const indexOfFirstCar = this.currentPage - 1;
+    const indexOfLastCar = indexOfFirstCar + this.carsPerPage;
     return this.data.slice(indexOfFirstCar, indexOfLastCar);
   }
 
@@ -67,12 +67,19 @@ class CarsStore {
   search(searchTerm) {
     this.data = filterCarsByName(Data, searchTerm);
     this.searchTerm = searchTerm;
-    const newPageLength = Math.ceil(this.data.length / this.carsPerPage);
-    this.currentPage = Math.min(newPageLength, this.currentPage);
+    this.adjustPage();
   }
+
   paginate(pageNumber) {
     this.data = filterCarsByName(Data, this.searchTerm);
     this.currentPage = pageNumber;
+    this.adjustPage();
+  }
+
+  adjustPage() {
+    const newPageLength = Math.ceil(this.data.length / this.carsPerPage);
+    this.currentPage = Math.min(newPageLength, this.currentPage);
+    this.currentPage = Math.max(this.currentPage, 1);
   }
 
   get pageNumbers() {
@@ -81,16 +88,11 @@ class CarsStore {
       .map((_, idx) => idx + 1);
   }
 
-  //BUGGY WITH PAGINATE AND SEARCH!
   deleteVehicle(id) {
-    let updatedList;
-    updatedList = this.data.filter((item) => {
-      if (item.id !== +id) {
-        return item;
-      }
-      return updatedList;
-    });
-    this.data = updatedList;
+    const indexOfData = Data.findIndex((item) => item.id === +id);
+    if (indexOfData === undefined) return;
+    Data.splice(indexOfData, 1);
+    this.search(this.searchTerm);
   }
 }
 

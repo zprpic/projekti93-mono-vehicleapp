@@ -1,4 +1,4 @@
-import {observable} from "mobx";
+import { observable } from "mobx";
 
 const Data = observable([
   {
@@ -93,7 +93,7 @@ const Data = observable([
 
   {
     name: "Honda",
-    model: "Civi",
+    model: "Civic",
     id: 15,
   },
 
