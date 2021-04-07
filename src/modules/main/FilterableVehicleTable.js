@@ -12,6 +12,7 @@ const FilterableVehicleTable = observer(({ store }) => {
         model={item.model}
         key={item.id}
         onClick={store.deleteVehicle.bind(store)}
+        onSubmit={store.editVehicle.bind(store)}
         id={item.id}
       />
     );

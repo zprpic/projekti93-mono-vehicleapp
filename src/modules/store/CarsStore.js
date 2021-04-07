@@ -94,6 +94,14 @@ class CarsStore {
     Data.splice(indexOfData, 1);
     this.search(this.searchTerm);
   }
+
+  editVehicle(carName, carModel, id) {
+    console.log("changed to", carName, carModel, id);
+    const indexofData = Data.findIndex((item) => item.id === +id);
+    Data[indexofData] = { name: carName, model: carModel, id: id };
+    this.data = [...Data];
+    this.search(this.searchTerm);
+  }
 }
 
 const store = new CarsStore();
