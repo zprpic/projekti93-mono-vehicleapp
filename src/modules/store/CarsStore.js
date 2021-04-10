@@ -39,8 +39,8 @@ class CarsStore {
 
   // Paginated data after data is filtered
   get paginatedData() {
-    const indexOfFirstCar = this.currentPage - 1;
-    const indexOfLastCar = indexOfFirstCar + this.carsPerPage;
+    const indexOfFirstCar = (this.currentPage - 1) * 5;
+    const indexOfLastCar = this.currentPage * this.carsPerPage;
     return this.data.slice(indexOfFirstCar, indexOfLastCar);
   }
 
@@ -96,7 +96,6 @@ class CarsStore {
   }
 
   editVehicle(carName, carModel, id) {
-    console.log("changed to", carName, carModel, id);
     const indexofData = Data.findIndex((item) => item.id === +id);
     Data[indexofData] = { name: carName, model: carModel, id: id };
     this.data = [...Data];
